@@ -1,0 +1,38 @@
+package br.api.java.productapp.controller;
+
+import java.io.Serializable;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.api.java.productapp.dto.PedidoDTO;
+import br.api.java.productapp.service.PedidoService;
+
+@RestController
+@RequestMapping(value = "/pedidos")
+public class PedidoController implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Autowired
+	PedidoService pedidoService;
+
+	@GetMapping
+	ResponseEntity<List<PedidoDTO>> listarPedidos() {
+		List<PedidoDTO> list = pedidoService.ListarPedidos();
+		return ResponseEntity.ok().body(list);
+	}
+
+	@PostMapping
+	ResponseEntity<PedidoDTO> adicionarPedidos(@RequestBody PedidoDTO dto) {
+		PedidoDTO pedido = pedidoService.adicionarPedidos(dto);
+		return ResponseEntity.ok().body(pedido);
+
+	}
+
+}

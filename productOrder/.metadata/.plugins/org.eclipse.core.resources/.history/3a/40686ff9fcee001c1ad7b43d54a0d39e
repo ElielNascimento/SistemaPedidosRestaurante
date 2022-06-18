@@ -1,0 +1,38 @@
+package br.api.java.productapp.service;
+
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import br.api.java.productapp.dto.PedidoDTO;
+import br.api.java.productapp.entities.Pedido;
+import br.api.java.productapp.enums.PedidoEnum;
+import br.api.java.productapp.repository.PedidoRepository;
+
+@Service
+public class PedidoService implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Autowired
+	PedidoRepository pedidoRepository;
+
+	@Autowired
+	public List<PedidoDTO> listarPedido() {
+		List<Pedido> list = pedidoRepository.findAll();
+		return list.stream().map(x -> new PedidoDTO(x)).collect(Collectors.toList());
+	}
+
+	@Autowired
+	public PedidoDTO adicionarPedidos(PedidoDTO dto) {
+		Pedido pedido = new Pedido(null, dto.getEndereco(), 
+				Instant.now(), PedidoEnum.PENDENTE);
+		pedidoRepository.save(pedido);
+		return new PedidoDTO(pedido);
+	}
+	
+	
+}
