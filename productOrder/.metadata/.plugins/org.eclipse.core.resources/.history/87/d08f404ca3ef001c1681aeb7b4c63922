@@ -1,0 +1,10 @@
+package br.api.java.productapp.entities;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tbl_order")
+public class Order {
+
+}

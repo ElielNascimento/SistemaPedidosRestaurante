@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,9 +19,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.api.java.productapp.dto.PedidoDTO;
 import br.api.java.productapp.service.PedidoService;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value = "/pedidos")
+@CrossOrigin("*")
 public class PedidoController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -28,12 +31,14 @@ public class PedidoController implements Serializable {
 	PedidoService pedidoService;
 
 	@GetMapping
+	@ApiOperation(value = "Lista de pedidos")
 	ResponseEntity<List<PedidoDTO>> listar() {
 		List<PedidoDTO> list = pedidoService.listar();
 		return ResponseEntity.ok().body(list);
 	}
 
 	@PostMapping
+	@ApiOperation(value = "Criação de um pedido")
 	ResponseEntity<PedidoDTO> adicionar(@RequestBody PedidoDTO dto) {
 		dto = pedidoService.adicionar(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
@@ -41,19 +46,22 @@ public class PedidoController implements Serializable {
 	}
 
 	@PutMapping("/{id}")
+	@ApiOperation(value = "Editar pedido pelo ID")
 	ResponseEntity<PedidoDTO> editar(@PathVariable Long id, @RequestBody PedidoDTO dto) {
 		dto = pedidoService.atualizar(id, dto);
 		return ResponseEntity.ok().body(dto);
 	}
 
 	@DeleteMapping("/{id}")
-	ResponseEntity<?> delete(@PathVariable Long id) {
+	@ApiOperation(value = "Deletar pedido pelo ID")
+	ResponseEntity<?> deletar(@PathVariable Long id) {
 		pedidoService.deletar(id);
 		return ResponseEntity.noContent().build();
 
 	}
 
 	@GetMapping("/{id}")
+	@ApiOperation(value = "Buscar pedido pelo ID")
 	ResponseEntity<PedidoDTO> buscarPeloId(@PathVariable Long id) {
 		PedidoDTO obj = pedidoService.buscarPeloId(id);
 		return ResponseEntity.ok().body(obj);

@@ -1,0 +1,13 @@
+package br.api.java.productapp.dto;
+
+import java.io.Serializable;
+
+public class ProdutoDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
+	private String nome;
+	private Double preco;
+	private String descricao;
+
+}

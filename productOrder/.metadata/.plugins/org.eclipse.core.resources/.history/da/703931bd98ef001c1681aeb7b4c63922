@@ -1,0 +1,14 @@
+package br.api.java.productapp.swaggerconfig;
+
+public class Swagger {
+	
+	@Bean
+	public Docket timeApi() {
+		return new Docket(DocumentationType.SWAGGER_2)
+				.select()
+				.apis(RequestHandlerSelectors
+				.basePackage("br.com.codeforcadastro.dbinitialization"))
+				.paths(PathSelectors.any()).build();
+	}
+
+}

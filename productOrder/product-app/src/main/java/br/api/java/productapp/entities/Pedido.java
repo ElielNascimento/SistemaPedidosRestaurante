@@ -2,12 +2,20 @@ package br.api.java.productapp.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import br.api.java.productapp.enums.PedidoEnum;
@@ -19,11 +27,29 @@ public class Pedido implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "pedido_id")
 	private Long id;
-
+	
+	@Column(name = "pedido_endereco")
 	private String endereco;
+	
+	@Column(name = "pedido_moment")
 	private Instant moment;
+	
+	@Column(name = "pedido_status")
+	@Enumerated(EnumType.STRING)
 	private PedidoEnum status;
+
+	
+	@ManyToMany
+	@JoinTable(name ="tbl_pedido_produto",
+	joinColumns = @JoinColumn(name = "pedido_id"),
+	inverseJoinColumns = @JoinColumn (name = "produto_id"))
+	private List<Produto> listDeProdutos = new ArrayList<>();
+	
+	
+	public Pedido() {
+	}
 
 	public Pedido(Long id, String endereco, Instant moment, PedidoEnum status) {
 		this.id = id;
@@ -62,9 +88,6 @@ public class Pedido implements Serializable {
 
 	public Long getId() {
 		return id;
-	}
-
-	public Pedido() {
 	}
 
 	@Override
