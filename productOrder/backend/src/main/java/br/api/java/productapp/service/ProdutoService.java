@@ -21,7 +21,7 @@ public class ProdutoService implements Serializable {
 	private ProdutoRepository produtoRepository;
 
 	public List<ProdutoDTO> listar() {
-		List<Produto> list = produtoRepository.findAll();
+		List<Produto> list = produtoRepository.findAllByOrderByPrecoDesc();
 		return list.stream().map(x -> new ProdutoDTO(x)).collect(Collectors.toList());
 	}
 

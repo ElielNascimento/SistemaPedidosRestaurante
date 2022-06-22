@@ -68,6 +68,7 @@ public class PedidoController implements Serializable {
 	}
 
 	@PutMapping("/{id}/entregue")
+	@ApiOperation(value = "Mudar status do pedido para entregue")
 	ResponseEntity<PedidoDTO> setEntrega(@PathVariable Long id) {
 		PedidoDTO dto = pedidoService.pedidoEntregue(id);
 		return ResponseEntity.ok().body(dto);
