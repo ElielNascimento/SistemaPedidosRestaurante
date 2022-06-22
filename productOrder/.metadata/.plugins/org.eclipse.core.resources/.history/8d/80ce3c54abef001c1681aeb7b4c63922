@@ -1,0 +1,17 @@
+package br.api.java.productapp.service;
+
+import java.io.Serializable;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import br.api.java.productapp.repository.PedidoRepository;
+
+@Service
+public class ProdutoService implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
+	@Autowired
+	private PedidoRepository pedidoRepository;
+
+}

@@ -1,0 +1,38 @@
+package br.api.java.productapp.service;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import br.api.java.productapp.dto.PedidoDTO;
+import br.api.java.productapp.dto.ProdutoDTO;
+import br.api.java.productapp.entities.Pedido;
+import br.api.java.productapp.entities.Produto;
+import br.api.java.productapp.repository.ProdutoRepository;
+
+@Service
+public class ProdutoService implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Autowired
+	private ProdutoRepository produtoRepository;
+
+	public List<ProdutoDTO> listar() {
+		List<Produto> list = produtoRepository.findAll();
+		return list.stream().map(x -> new ProdutoDTO(x)).collect(Collectors.toList());
+	}
+
+	public ProdutoDTO buscarPeloId(Long id) {
+		Produto produto = produtoRepository.findById(id).get();
+		return new ProdutoDTO(produto);
+
+	}
+
+	public ProdutoDTO adicionar(ProdutoDTO dto) {
+		PedidoDTO pedido = new PedidoDTO(null, dto.getEndereco(), dto.getMoment(), dto.getStatus());
+	}
+
+}
