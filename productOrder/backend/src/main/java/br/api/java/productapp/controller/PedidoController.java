@@ -73,5 +73,5 @@ public class PedidoController implements Serializable {
 		PedidoDTO dto = pedidoService.pedidoEntregue(id);
 		return ResponseEntity.ok().body(dto);
 	}
-	
+
 }

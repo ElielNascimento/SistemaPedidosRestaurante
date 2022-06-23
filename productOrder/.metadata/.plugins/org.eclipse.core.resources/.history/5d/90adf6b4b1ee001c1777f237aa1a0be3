@@ -1,5 +1,0 @@
-package br.api.java.productapp.security;
-
-public class SecurityConfig {
-
-}

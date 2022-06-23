@@ -21,8 +21,8 @@ public class ProdutoService implements Serializable {
 	private ProdutoRepository produtoRepository;
 
 	public List<ProdutoDTO> listar() {
-		List<Produto> list = produtoRepository.findAllByOrderByPrecoDesc();
-		return list.stream().map(x -> new ProdutoDTO(x)).collect(Collectors.toList());
+		List<Produto> lists = produtoRepository.findAllByOrderByPrecoDesc();
+		return lists.stream().map(x -> new ProdutoDTO(x)).collect(Collectors.toList());
 	}
 
 	public ProdutoDTO buscarPeloId(Long id) {
@@ -58,7 +58,12 @@ public class ProdutoService implements Serializable {
 		} else {
 			produtoRepository.deleteById(id);
 		}
-
 	}
 
+	public List<ProdutoDTO> buscarProdutoPeloNome(String nome) {
+		List<Produto> prods = produtoRepository.findByNome(nome);
+		return  prods.stream().map(x -> new ProdutoDTO(x))
+				.collect(Collectors.toList());
+
+	}
 }

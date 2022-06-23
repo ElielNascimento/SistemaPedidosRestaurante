@@ -1,7 +1,0 @@
-package br.api.java.productapp.enums;
-
-public interface PedidoEnum {
-	
-	PENDEN
-
-}

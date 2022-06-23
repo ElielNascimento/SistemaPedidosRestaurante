@@ -60,8 +60,17 @@ public class ProdutoController implements Serializable {
 	@DeleteMapping("/{id}")
 	@ApiOperation(value = "Deletar produto pelo ID")
 	private ResponseEntity<?> deletar(@PathVariable Long id) {
+
 		produtoService.deletar(id);
 		return ResponseEntity.noContent().build();
+	}
+
+	@GetMapping("/nome/{nome}")
+	@ApiOperation(value = "Buscar lista de produtos pelo nome")
+	private ResponseEntity<List<ProdutoDTO>> byName(@PathVariable String nome) {
+		List<ProdutoDTO> prod = produtoService.buscarProdutoPeloNome(nome);
+		return ResponseEntity.ok().body(prod);
 
 	}
+
 }

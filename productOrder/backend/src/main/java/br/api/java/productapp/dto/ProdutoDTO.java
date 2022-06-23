@@ -1,8 +1,6 @@
 package br.api.java.productapp.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import br.api.java.productapp.entities.Produto;
