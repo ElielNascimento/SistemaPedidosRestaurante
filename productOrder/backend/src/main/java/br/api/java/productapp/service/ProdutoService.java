@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +29,6 @@ public class ProdutoService implements Serializable {
 
 	}
 
-	@Transactional
 	public ProdutoDTO adicionar(ProdutoDTO dto) {
 		Produto produto = new Produto(null, dto.getNome(), dto.getPreco(), dto.getDescricao());
 		produtoRepository.save(produto);
@@ -39,7 +36,6 @@ public class ProdutoService implements Serializable {
 
 	}
 
-	@Transactional
 	public ProdutoDTO editar(Long id, ProdutoDTO obj) {
 		Produto produto = produtoRepository.findById(id).get();
 		produto.setNome(obj.getNome());
@@ -47,7 +43,6 @@ public class ProdutoService implements Serializable {
 		produto.setDescricao(obj.getDescricao());
 
 		produtoRepository.save(produto);
-
 		return new ProdutoDTO(produto);
 	}
 
@@ -62,8 +57,7 @@ public class ProdutoService implements Serializable {
 
 	public List<ProdutoDTO> buscarProdutoPeloNome(String nome) {
 		List<Produto> prods = produtoRepository.findByNome(nome);
-		return  prods.stream().map(x -> new ProdutoDTO(x))
-				.collect(Collectors.toList());
+		return prods.stream().map(x -> new ProdutoDTO(x)).collect(Collectors.toList());
 
 	}
 }

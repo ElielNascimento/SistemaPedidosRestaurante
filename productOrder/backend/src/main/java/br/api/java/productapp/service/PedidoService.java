@@ -30,23 +30,22 @@ public class PedidoService implements Serializable {
 
 	public List<PedidoDTO> listar() {
 		List<Pedido> list = pedidoRepository.findAll();
-		return list.stream().map(x -> new PedidoDTO(x))
-				.collect(Collectors.toList());
+		return list.stream().map(x -> new PedidoDTO(x)).collect(Collectors.toList());
 	}
 
-	@Transactional
 	public PedidoDTO adicionar(PedidoDTO dto) {
-		Pedido pedido = new Pedido(null, dto.getEndereco(), Instant.now(),
-				PedidoEnum.PENDENTE);
+		Pedido pedido = new Pedido(null, dto.getEndereco(), Instant.now(), PedidoEnum.PENDENTE);
 		for (ProdutoDTO p : dto.getListDeProdutos()) {
 			Produto produto = produtoRepository.getReferenceById(p.getId());
 			pedido.getListDeProdutos().add(produto);
+			produtoRepository.save(produto);
+
 		}
 		pedido = pedidoRepository.save(pedido);
+
 		return new PedidoDTO(pedido);
 	}
 
-	@Transactional
 	public PedidoDTO atualizar(Long id, PedidoDTO novoObjeto) {
 		Pedido obj = pedidoRepository.findById(id).get();
 		obj.setEndereco(novoObjeto.getEndereco());
