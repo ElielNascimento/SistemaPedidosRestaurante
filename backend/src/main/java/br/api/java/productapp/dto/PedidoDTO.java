@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Objects;
 
 import br.api.java.productapp.entities.Pedido;
-import br.api.java.productapp.entities.Produto;
 import br.api.java.productapp.enums.PedidoEnum;
 
 public class PedidoDTO {
@@ -19,14 +18,6 @@ public class PedidoDTO {
 	private List<ProdutoDTO> listDeProdutos = new ArrayList<>();
 
 	public PedidoDTO() {
-
-	}
-
-	public PedidoDTO(Long id, String endereco, Instant moment, PedidoEnum status) {
-		this.id = id;
-		this.endereco = endereco;
-		this.moment = moment;
-		this.status = status;
 	}
 
 	public PedidoDTO(Pedido entity) {
