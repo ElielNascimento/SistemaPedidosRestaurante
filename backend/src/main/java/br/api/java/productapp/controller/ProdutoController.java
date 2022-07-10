@@ -2,9 +2,10 @@ package br.api.java.productapp.controller;
 
 import java.io.Serializable;
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,7 @@ import br.api.java.productapp.service.ProdutoService;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping(value = "/produtos")
+@RequestMapping(value = "/api/produtos")
 public class ProdutoController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,9 +30,9 @@ public class ProdutoController implements Serializable {
 	private ProdutoService produtoService;
 
 	@GetMapping
-	@ApiOperation(value = "Lista de produtos ")
-	private ResponseEntity<List<ProdutoDTO>> listar() {
-		List<ProdutoDTO> list = produtoService.listar();
+	@ApiOperation(value = "Lista de produtos paginada")
+	private ResponseEntity<Page<ProdutoDTO>> listar(Pageable pageable) {
+		Page<ProdutoDTO> list = produtoService.listar(pageable);
 		return ResponseEntity.ok().body(list);
 	}
 
@@ -63,14 +64,6 @@ public class ProdutoController implements Serializable {
 
 		produtoService.deletar(id);
 		return ResponseEntity.noContent().build();
-	}
-
-	@GetMapping("/nome/{nome}")
-	@ApiOperation(value = "Buscar lista de produtos pelo nome")
-	private ResponseEntity<List<ProdutoDTO>> byName(@PathVariable String nome) {
-		List<ProdutoDTO> prod = produtoService.buscarProdutoPeloNome(nome);
-		return ResponseEntity.ok().body(prod);
-
 	}
 
 }

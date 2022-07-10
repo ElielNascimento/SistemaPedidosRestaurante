@@ -2,12 +2,10 @@ package br.api.java.productapp.service;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.api.java.productapp.dto.PedidoDTO;
@@ -28,9 +26,11 @@ public class PedidoService implements Serializable {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 
-	public List<PedidoDTO> listar() {
-		List<Pedido> list = pedidoRepository.findAll();
-		return list.stream().map(x -> new PedidoDTO(x)).collect(Collectors.toList());
+	public Page<PedidoDTO> listar(Pageable pageable) {
+		Page<Pedido> response = pedidoRepository.findAll(pageable);
+		Page<PedidoDTO> page = response.map(x -> new PedidoDTO(x));
+		return page;
+		
 	}
 
 	public PedidoDTO adicionar(PedidoDTO dto) {

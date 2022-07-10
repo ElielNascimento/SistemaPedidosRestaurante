@@ -1,10 +1,10 @@
 package br.api.java.productapp.service;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.api.java.productapp.dto.ProdutoDTO;
@@ -18,9 +18,10 @@ public class ProdutoService implements Serializable {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 
-	public List<ProdutoDTO> listar() {
-		List<Produto> lists = produtoRepository.findAllByOrderByPrecoDesc();
-		return lists.stream().map(x -> new ProdutoDTO(x)).collect(Collectors.toList());
+	public Page<ProdutoDTO> listar(Pageable pageable) {
+		Page<Produto> response = produtoRepository.findAll(pageable);
+		Page<ProdutoDTO> page = response.map(x -> new ProdutoDTO(x));
+		return page;
 	}
 
 	public ProdutoDTO buscarPeloId(Long id) {
@@ -55,9 +56,4 @@ public class ProdutoService implements Serializable {
 		}
 	}
 
-	public List<ProdutoDTO> buscarProdutoPeloNome(String nome) {
-		List<Produto> prods = produtoRepository.findByNome(nome);
-		return prods.stream().map(x -> new ProdutoDTO(x)).collect(Collectors.toList());
-
-	}
 }

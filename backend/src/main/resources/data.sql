@@ -1,3 +1,8 @@
+
+INSERT INTO tbl_produto(produto_nome, produto_preco, produto_descricao) VALUES 
+('Pizza Dev', 149.0, 'Molho hash, com dto, spring security, sem bug e produção.');
+
+
 INSERT INTO tbl_produto(produto_nome, produto_preco, produto_descricao) VALUES 
 ('Pizza Bacon', 50.0, 'Pizza de bacon com mussarela, orégano, molho especial e tempero da casa.');
 
@@ -11,6 +16,30 @@ INSERT INTO tbl_produto(produto_nome, produto_preco, produto_descricao) VALUES
 
 INSERT INTO tbl_produto(produto_nome, produto_preco, produto_descricao) VALUES 
 ('Pizza Frango', 49.0, 'Pizza frango, com mussarela, orégano, molho especial e tempero da casa.');
+
+INSERT INTO tbl_produto(produto_nome, produto_preco, produto_descricao) VALUES 
+('Pizza Especial', 149.0, 'Molho list, com dto, orégano, mostarda e produção.');
+
+
+INSERT INTO tbl_produto(produto_nome, produto_preco, produto_descricao) VALUES 
+('Pizza Especial', 169.0, 'Molho list, com dto, orégano, mostarda e produção.');
+
+
+INSERT INTO tbl_produto(produto_nome, produto_preco, produto_descricao) VALUES 
+('Pizza Especial', 149.0, 'Molho list, com dto, orégano, mostarda e produção.');
+
+
+INSERT INTO tbl_produto(produto_nome, produto_preco, produto_descricao) VALUES 
+('Pizza Especial', 122.0, 'Molho list, com dto, orégano, mostarda e produção.');
+
+
+INSERT INTO tbl_produto(produto_nome, produto_preco, produto_descricao) VALUES 
+('Pizza Especial', 119.0, 'Molho list, com dto, orégano, mostarda e produção.');
+
+
+
+
+
 
 
 

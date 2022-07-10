@@ -2,9 +2,10 @@ package br.api.java.productapp.controller;
 
 import java.io.Serializable;
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,7 +23,7 @@ import br.api.java.productapp.service.PedidoService;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping(value = "/pedidos")
+@RequestMapping(value = "/api/pedidos")
 @CrossOrigin("*")
 public class PedidoController implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -31,9 +32,9 @@ public class PedidoController implements Serializable {
 	PedidoService pedidoService;
 
 	@GetMapping
-	@ApiOperation(value = "Lista de pedidos")
-	ResponseEntity<List<PedidoDTO>> listar() {
-		List<PedidoDTO> list = pedidoService.listar();
+	@ApiOperation(value = "Lista de pedidos paginada")
+	ResponseEntity<Page<PedidoDTO>> listar(Pageable pageable) {
+		Page<PedidoDTO> list = pedidoService.listar(pageable);
 		return ResponseEntity.ok().body(list);
 	}
 
