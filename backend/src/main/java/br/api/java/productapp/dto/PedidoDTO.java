@@ -1,5 +1,6 @@
 package br.api.java.productapp.dto;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +9,9 @@ import java.util.Objects;
 import br.api.java.productapp.entities.Pedido;
 import br.api.java.productapp.enums.PedidoEnum;
 
-public class PedidoDTO {
-
+public class PedidoDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private Long id;
 	private String endereco;
 	private Instant moment;
