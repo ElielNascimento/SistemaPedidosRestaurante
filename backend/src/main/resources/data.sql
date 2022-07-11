@@ -37,12 +37,6 @@ INSERT INTO tbl_produto(produto_nome, produto_preco, produto_descricao) VALUES
 ('Pizza Especial', 119.0, 'Molho list, com dto, orégano, mostarda e produção.');
 
 
-
-
-
-
-
-
 INSERT INTO tbl_pedido(pedido_endereco, pedido_moment, pedido_status) VALUES
 ('Av Cuiaba 1818', TIMESTAMP WITH TIME ZONE '2022-01-01T22:00:00Z', 'PENDENTE');
 
